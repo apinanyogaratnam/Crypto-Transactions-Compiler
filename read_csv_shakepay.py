@@ -3,27 +3,30 @@ import csv
 
 #file_name = input("Enter file name with extension: ")
 
-fiat_fundings = []
-purchase_sales = [] # complete
-peer_transfers = [] # complete (except actual peer transfers)
-referral_rewards = []
-crypto_cashouts = []
+def get_data_shakepay():
+    fiat_fundings = []
+    purchase_sales = [] # complete
+    peer_transfers = [] # complete (except actual peer transfers)
+    referral_rewards = []
+    crypto_cashouts = []
 
-with open("transactions_summary.csv", "r") as file:
-    reader = csv.reader(file)
-    next(reader)
+    with open("transactions_summary.csv", "r") as file:
+        reader = csv.reader(file)
+        next(reader)
+        
+        for row in reader:
+            if (row[0] == "peer transfer"): # assuming peer transfers are shaking sats only (for now)
+                peer_transfers.append(row)
+            elif (row[0] == "purchase/sale"):
+                purchase_sales.append(row)
+            elif (row[0] == "fiat funding"):
+                fiat_fundings.append(row)
+            elif (row[0] == "referral reward"):
+                referral_rewards.append(row)
+            elif (row[0] == "crypto cashout"):
+                crypto_cashouts.append(row)
     
-    for row in reader:
-        if (row[0] == "peer transfer"): # assuming peer transfers are shaking sats only (for now)
-            peer_transfers.append(row)
-        elif (row[0] == "purchase/sale"):
-            purchase_sales.append(row)
-        elif (row[0] == "fiat funding"):
-            fiat_fundings.append(row)
-        elif (row[0] == "referral reward"):
-            referral_rewards.append(row)
-        elif (row[0] == "crypto cashout"):
-            crypto_cashouts.append(row)
+    return (fiat_fundings, purchase_sales, peer_transfers, referral_rewards, crypto_cashouts)
 
 # shakepay csv format:
 # Transaction Type | Date | Amount Debited | Debit Currency | Amount Credited | Credit Currency | Buy/Sell rate | Credit/Debit | Spot Rate | Address | Blockchain Transaction ID
@@ -64,9 +67,9 @@ def get_purchases_shakepay(transactions):
     return (purchase_total_bitcoin, bitcoin_received, purchase_total_ethereum, ethereum_received)
 
 
-purchases = get_purchases_shakepay(purchase_sales)
-print("Total spent on Bitcoin: ", purchases[0])
-print("Amount of bitcoin received: ", purchases[1])
+# purchases = get_purchases_shakepay(purchase_sales)
+# print("Total spent on Bitcoin: ", purchases[0])
+# print("Amount of bitcoin received: ", purchases[1])
 
-print("Total spent on Ethereum: ", purchases[2])
-print("Amount of Ethereum received: ", purchases[3])
+# print("Total spent on Ethereum: ", purchases[2])
+# print("Amount of Ethereum received: ", purchases[3])
