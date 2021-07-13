@@ -19,13 +19,13 @@ with open("transactions_summary.csv", "r") as file:
     for row in reader:
         if (row[0] == "peer transfer"): # assuming peer transfers are shaking sats only (for now)
             shaking_sats_transactions.append(row)
-        if (row[0] == "purchase/sale"):
+        elif (row[0] == "purchase/sale"):
             purchase_sales.append(row)
-        if (row[0] == "fiat funding"):
+        elif (row[0] == "fiat funding"):
             fiat_fundings.append(row)
-        if (row[0] == "referral reward"):
+        elif (row[0] == "referral reward"):
             referral_rewards.append(row)
-        if (row[0] == "crypto cashout"):
+        elif (row[0] == "crypto cashout"):
             crypto_cashouts.append(row)
 
 # shakepay csv format:
@@ -36,7 +36,7 @@ def calculate_shakin_sats(transactions):
     for transaction in transactions:
         count += float(transaction[4])
     
-    return (count, convert_btc_to_cad(count))
+    return (count, """convert_btc_to_cad(count)""")
 
 
 # def convert_btc_to_cad(number_of_bitcoins):
@@ -48,3 +48,24 @@ def calculate_shakin_sats(transactions):
 #     return btc_cad * number_of_bitcoins
 
 # print(calculate_shakin_sats(shaking_sats_transactions))
+
+purchase_total_bitcoin = 0.0
+bitcoin_received = 0.0
+purchase_total_ethereum = 0.0
+ethereum_received = 0.0
+
+for sale in purchase_sales:
+    if ("," in sale[2]): sale[2] = sale[2].replace(",", "")
+    if (sale[5] == "BTC"):
+        purchase_total_bitcoin += float(sale[2])
+        bitcoin_received += float(sale[4])
+    elif (sale[5] == "ETH"):
+        purchase_total_ethereum += float(sale[2])
+        ethereum_received += float(sale[4])
+    
+print("Total spent on Bitcoin: ", purchase_total_bitcoin)
+print("Amount of bitcoin bought: ", bitcoin_received)
+
+print("Total spent on Ethereum: ", purchase_total_ethereum)
+print("Amount of Ethereum bought: ", ethereum_received)
+
