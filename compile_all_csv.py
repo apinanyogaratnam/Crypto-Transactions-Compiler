@@ -34,3 +34,13 @@ print("Total bitcoin received: ", total_bitcoin_received)
 
 print("Total spent on ethereum: ", total_spent_on_ethereum)
 print("Total ethereum received: ", "{:.9f}".format(total_ethereum_received))
+
+print("Loading...", end="\r")
+current_value_of_your_bitcoin = convert_btc_to_cad(total_bitcoin_received)
+print("Current value of your bitcoin: ", current_value_of_your_bitcoin)
+print("Profit/Loss of your bitcoin: : ", current_value_of_your_bitcoin - total_spent_on_bitcoin)
+
+print("Loading...", end="\r")
+current_value_of_your_ethereum = convert_eth_to_cad(total_ethereum_received)
+print("Current value of your ethereum: ", current_value_of_your_ethereum)
+print("Profit/Loss of your ethereum: : ", current_value_of_your_ethereum - total_spent_on_ethereum)

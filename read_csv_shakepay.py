@@ -1,5 +1,5 @@
 import csv
-# import requests, json
+import requests, json
 
 #file_name = input("Enter file name with extension: ")
 
@@ -39,13 +39,22 @@ def calculate_shakin_sats(transactions):
     return (count, """convert_btc_to_cad(count)""")
 
 
-# def convert_btc_to_cad(number_of_bitcoins):
-#     response = requests.get("https://api.shakepay.co/rates")
-#     response = response.json()
-#     data = response
-#     btc_cad = data['BTC_CAD']
+def convert_btc_to_cad(number_of_bitcoins):
+    response = requests.get("https://api.shakepay.co/rates")
+    response = response.json()
+    data = response
+    btc_cad = data['BTC_CAD']
 
-#     return btc_cad * number_of_bitcoins
+    return btc_cad * number_of_bitcoins
+
+
+def convert_eth_to_cad(number_of_ethereum):
+    response = requests.get("https://api.shakepay.co/rates")
+    response = response.json()
+    data = response
+    eth_cad = data['ETH_CAD']
+
+    return eth_cad * number_of_ethereum
     
 
 def get_purchases_shakepay(transactions):
