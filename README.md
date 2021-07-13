@@ -5,3 +5,6 @@ works with shakepay
 works with newton
 
 - Subtract referral bonus
+
+## License
+[MIT License](LICENSE)
