@@ -50,3 +50,4 @@ percent_gains_of_your_ethereum = round(profit_of_your_ethereum / total_spent_on_
 print("Current value of your ethereum: ", current_value_of_your_ethereum)
 print("Profit/Loss of your ethereum: : ", profit_of_your_ethereum)
 print("Percentage up/down of your ethereum: ", percent_gains_of_your_ethereum, "%")
+
