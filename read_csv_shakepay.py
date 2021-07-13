@@ -54,7 +54,7 @@ def get_purchases_shakepay(transactions):
     purchase_total_ethereum = 0.0
     ethereum_received = 0.0
 
-    for sale in purchase_sales:
+    for sale in transactions:
         if ("," in sale[2]): sale[2] = sale[2].replace(",", "")
         if (sale[5] == "BTC"):
             purchase_total_bitcoin += float(sale[2])

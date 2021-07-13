@@ -34,7 +34,7 @@ def get_purchases_newton(transactions):
     purchase_total_litecoin = 0.0
     litecoin_received = 0.0
 
-    for transaction in trade_transactions:
+    for transaction in transactions:
         received_currency = transaction[3]
         sent_currency = transaction[5] # need to use this in our caluclation somehow after
         # as of now, assumed if received is btc, eth, ltc, sent is cad
