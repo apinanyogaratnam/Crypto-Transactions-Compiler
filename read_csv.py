@@ -48,24 +48,30 @@ def calculate_shakin_sats(transactions):
 #     return btc_cad * number_of_bitcoins
 
 # print(calculate_shakin_sats(shaking_sats_transactions))
-
-purchase_total_bitcoin = 0.0
-bitcoin_received = 0.0
-purchase_total_ethereum = 0.0
-ethereum_received = 0.0
-
-for sale in purchase_sales:
-    if ("," in sale[2]): sale[2] = sale[2].replace(",", "")
-    if (sale[5] == "BTC"):
-        purchase_total_bitcoin += float(sale[2])
-        bitcoin_received += float(sale[4])
-    elif (sale[5] == "ETH"):
-        purchase_total_ethereum += float(sale[2])
-        ethereum_received += float(sale[4])
     
-print("Total spent on Bitcoin: ", purchase_total_bitcoin)
-print("Amount of bitcoin bought: ", bitcoin_received)
 
-print("Total spent on Ethereum: ", purchase_total_ethereum)
-print("Amount of Ethereum bought: ", ethereum_received)
+def get_purchases_shakepay(transactions):
+    purchase_total_bitcoin = 0.0
+    bitcoin_received = 0.0
+    purchase_total_ethereum = 0.0
+    ethereum_received = 0.0
 
+    for sale in purchase_sales:
+        if ("," in sale[2]): sale[2] = sale[2].replace(",", "")
+        if (sale[5] == "BTC"):
+            purchase_total_bitcoin += float(sale[2])
+            bitcoin_received += float(sale[4])
+        elif (sale[5] == "ETH"):
+            purchase_total_ethereum += float(sale[2])
+            ethereum_received += float(sale[4])
+    
+    # returning (total spent on bitcoin, total bitcoin received from purchase, total spent on ethereum, total ethereum receieved from purchase)
+    return (purchase_total_bitcoin, bitcoin_received, purchase_total_ethereum, ethereum_received)
+
+
+purchases = get_purchases_shakepay(purchase_sales)
+print("Total spent on Bitcoin: ", purchases[0])
+print("Amount of bitcoin bought: ", purchases[1])
+
+print("Total spent on Ethereum: ", purchases[2])
+print("Amount of Ethereum bought: ", purchases[3])
