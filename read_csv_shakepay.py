@@ -75,10 +75,11 @@ def get_purchases_shakepay(transactions):
     # returning (total spent on bitcoin, total bitcoin received from purchase, total spent on ethereum, total ethereum receieved from purchase)
     return (purchase_total_bitcoin, bitcoin_received, purchase_total_ethereum, ethereum_received)
 
+if __name__ == '__main__':
+    purchase_sales = get_data_shakepay()[1]
+    purchases = get_purchases_shakepay(purchase_sales)
+    print("Total spent on Bitcoin: ", purchases[0])
+    print("Amount of bitcoin received: ", purchases[1])
 
-# purchases = get_purchases_shakepay(purchase_sales)
-# print("Total spent on Bitcoin: ", purchases[0])
-# print("Amount of bitcoin received: ", purchases[1])
-
-# print("Total spent on Ethereum: ", purchases[2])
-# print("Amount of Ethereum received: ", purchases[3])
+    print("Total spent on Ethereum: ", purchases[2])
+    print("Amount of Ethereum received: ", purchases[3])
